@@ -19,7 +19,7 @@ class RANOperator(bpy.types.Operator):
     """Replaces the Texture to whatever you want"""
     bl_idname = "cobject.cs1"
     bl_label = "Converter"
-    ###############################################UNDO THIS IF NOT WORKING################# bl_options = {'REGISTER', 'UNDO'} # You need this for Adjust Last Operation panel
+    ############################################### REMOVE THIS COMMENT IF NOT WORKING ################# bl_options = {'REGISTER', 'UNDO'} # You need this for Adjust Last Operation panel
     Original: StringProperty(
         name="Original",
         default=".dds",
@@ -36,7 +36,7 @@ class RANOperator(bpy.types.Operator):
             i.filepath = i.filepath.replace(self.Original, self.Resultant)
             i.name = i.name.replace(self.Original, self.Resultant) 
         return {'FINISHED'}
-    def invoke(self, context, event): ########################################################REMOVE THIS IF NOT WORKING##########################################
+    def invoke(self, context, event): ########################################################REMOVE THIS IF TOO NOT WORKING##########################################
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
@@ -64,13 +64,3 @@ def unregister():
      
 if __name__ == "__main__":
     register()
-
-'''  Change Blend Mode
-import bpy
-
-context = bpy.context
-
-for o in context.selected_objects:
-
-    o.active_material.blend_method = 'OPAQUE'
-'''
