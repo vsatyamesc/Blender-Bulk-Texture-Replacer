@@ -16,3 +16,5 @@ Usage:
 6. Now, File > External Data > Find Missing File and go where your converted texture files are.
  
 This should bulk replace all the texture files.
+
+##New Update on its way
