@@ -17,4 +17,4 @@ Usage:
  
 This should bulk replace all the texture files.
 
-##New Update on its way
+## New Update on its way
