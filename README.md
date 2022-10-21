@@ -17,7 +17,7 @@ Usage:
  
 This should bulk replace all the texture files.
 
-## New Update on its way
+## New Feature: Bulk Blend Type Changer
 
 Added Bulk Blend Type Change Feature.
 
@@ -30,4 +30,5 @@ Usage:
 4. In Resultant, select the type you want to convert to.
 5. Click "OK"
 
-
+## More Updates on Way!!
+>> Replacing missing image texture with the one you want.
