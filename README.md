@@ -18,3 +18,16 @@ Usage:
 This should bulk replace all the texture files.
 
 ## New Update on its way
+
+Added Bulk Blend Type Change Feature.
+
+This "Change" feature should be just below your "Bulk Text Replacer".
+
+Usage:
+1. Click on Change Button.
+2. A Dialog will appear.
+3. In Original, select the Blend Type from which you want to Change (All: for replacing all the Blend Type)
+4. In Resultant, select the type you want to convert to.
+5. Click "OK"
+
+
