@@ -1,12 +1,12 @@
 bl_info = {
-    "name": "Bulk Texture Replace",
+    "name": "Bulk Replace",
     "author": "Seven3D",
     "version": (1, 1),
     "blender": (3, 0, 0),
     "location": "View3D > Tool > Replace Texture(s)",
-    "description": "Bulk Replace the Texture",
+    "description": "Bulk Replace the Texture \n Bulk convert Blend Mode",
     "warning": "",
-    "doc_url": "https://pastebin.com/XBnJSWrj",
+    "doc_url": "https://github.com/SatyamSSJ10/Blender-Bulk-Texture-Replacer/blob/main/README.md",
     "category": "Tool",
 }
 
@@ -19,7 +19,7 @@ class RANOperator(bpy.types.Operator):
     """Replaces the Texture to whatever you want"""
     bl_idname = "cobject.cs1"
     bl_label = "Converter"
-    ############################################### REMOVE THIS COMMENT IF NOT WORKING ################# bl_options = {'REGISTER', 'UNDO'} # You need this for Adjust Last Operation panel
+    ###############################################UNDO THIS IF NOT WORKING################# bl_options = {'REGISTER', 'UNDO'} # You need this for Adjust Last Operation panel
     Original: StringProperty(
         name="Original",
         default=".dds",
@@ -30,17 +30,96 @@ class RANOperator(bpy.types.Operator):
         name="Resultant",
         default=".png",
         description="the extension name with '.' before it",
-    ) # you could add more of these   
+    ) # you can add more of these   
+    
     def execute(self, context):
         for i in bpy.data.images:
-            i.filepath = i.filepath.replace(self.Original, self.Resultant)
-            i.name = i.name.replace(self.Original, self.Resultant) 
+                try:
+                    i.filepath = i.filepath.replace(self.Original, self.Resultant)
+                    i.name = i.name.replace(self.Original, self.Resultant)
+                    print("done")
+                except:
+                    print("replace failed")   
         return {'FINISHED'}
-    def invoke(self, context, event): ########################################################REMOVE THIS IF TOO NOT WORKING##########################################
+    def invoke(self, context, event): ########################################################REMOVE THIS IF NOT WORKING##########################################
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
-class COS(bpy.types.Panel):
+class BANOperator(bpy.types.Operator):
+    """Replaces the Texture to whatever you want"""
+    bl_idname = "cobject.cs2"
+    bl_label = "Changer"
+    inz_initial: bpy.props.EnumProperty(
+        name="Original",
+        description='Select the Blend Type of your Object',
+        items = [
+            ("0","All", "Every Blend type"),
+            ("1","Blend", "Alpha Blend type"),
+            ("2","Hashed", "Alpha Hashed type"),
+            ("3","Clip", "Alpha Clip type"),
+            ("4","Opaque", "Opaque type")
+        ]
+    )
+    inz_final: bpy.props.EnumProperty(
+        name="Final",
+        description='Select the Blend Type of your Object',
+        items = [
+            ("1","Blend", "Alpha Blend type"),
+            ("2","Hashed", "Alpha Hashed type"),
+            ("3","Clip", "Alpha Clip type"),
+            ("4","Opaque", "Opaque type")
+        ]
+    )
+    def blendmd_chk(self,initial=None,final=None):
+        switcher = {"0":"All", "1":"BLEND","2":"HASHED","3":"CLIP","4":"OPAQUE"}
+        initial = switcher[initial]
+        if initial == "All" or None:
+            initial = ["BLEND","HASHED","CLIP","OPAQUE"]
+        else:
+            pass
+        if final == None:
+            final = switcher["4"]
+        final = switcher[final]
+        return [initial, final]
+
+    def execute(self, context):
+        context = bpy.context
+        res = self.blendmd_chk(self.inz_initial,self.inz_final)
+        print(res)
+        try:
+           for o in bpy.data.materials:
+                if res[0] == res[1]:
+                    pass
+                elif isinstance(res[0],list):
+                    if o.blend_method in res[0]:
+                        o.blend_method = res[1]
+                    else:
+                        if o.blend_method is None:
+                            print("Object"+str(o)+"is NoneType")
+                elif o.blend_method == res[0]:
+                    o.blend_method = res[1]
+                else:
+                    print("Error processing object : "+str(o))
+        except:
+            print("Tis Not Working")
+        return {'FINISHED'}
+    
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+    
+    def draw(self, context):
+        layout = self.layout
+        col = layout.column()
+        col.label(text="Convert From")
+        row = col.row()
+        row.prop(self, "inz_initial")
+        
+        col.label(text="Convert To")
+        col.prop(self, "inz_final")  
+
+       
+class COS_PT_gg(bpy.types.Panel):
     bl_label = "Replace Texture(s)"
     bl_idname = "cobject_PT_"
     bl_space_type = 'VIEW_3D'
@@ -51,8 +130,20 @@ class COS(bpy.types.Panel):
         layout = self.layout  
         row = layout.row()
         row.operator(RANOperator.bl_idname, text = "Replace", icon = "UV_SYNC_SELECT")
+
+class COS1_PT_gg(bpy.types.Panel):
+    bl_label = "Change Blend Mode"
+    bl_idname = "cobject_PT1_"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_category = "Tool"
+    
+    def draw(self, context):
+        layout = self.layout  
+        row = layout.row()
+        row.operator(BANOperator.bl_idname, text = "Change", icon = "GP_MULTIFRAME_EDITING")
         
-_classes = [ RANOperator, COS]       
+_classes = [ RANOperator, BANOperator, COS_PT_gg, COS1_PT_gg]       
 
 def register():
     for cls in _classes:
