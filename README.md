@@ -32,3 +32,6 @@ Usage:
 
 ## More Updates on Way!!
 >> Replacing missing image texture with the one you want.
+
+
+## If you run into Error please raise an issue. But before that please copy the errors from "System Console Window" and paste in the issue.
