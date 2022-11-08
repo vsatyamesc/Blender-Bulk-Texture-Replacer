@@ -1,10 +1,10 @@
 bl_info = {
     "name": "Bulk Replace",
     "author": "Seven3D",
-    "version": (1, 1),
+    "version": (1, 2),
     "blender": (3, 0, 0),
     "location": "View3D > Tool > Replace Texture(s)",
-    "description": "Bulk Replace the Texture \n Bulk convert Blend Mode",
+    "description": "Bulk Replace the Texture \n Bulk convert Blend Mode \n Bulk Name Replace",
     "warning": "",
     "doc_url": "https://github.com/SatyamSSJ10/Blender-Bulk-Texture-Replacer/blob/main/README.md",
     "category": "Tool",
@@ -19,7 +19,6 @@ class RANOperator(bpy.types.Operator):
     """Replaces the Texture to whatever you want"""
     bl_idname = "cobject.cs1"
     bl_label = "Converter"
-    ###############################################UNDO THIS IF NOT WORKING################# bl_options = {'REGISTER', 'UNDO'} # You need this for Adjust Last Operation panel
     Original: StringProperty(
         name="Original",
         default=".dds",
@@ -41,7 +40,42 @@ class RANOperator(bpy.types.Operator):
                 except:
                     print("replace failed")   
         return {'FINISHED'}
-    def invoke(self, context, event): ########################################################REMOVE THIS IF NOT WORKING##########################################
+    def invoke(self, context, event): 
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+
+class ReANOperator(bpy.types.Operator):
+    """Renames/Changes part of name to whatever you want"""
+    bl_idname = "cobject.cs3"
+    bl_label = "Rename/Replace"
+    Original: StringProperty(
+        name="Original",
+        default="Defualt",
+        description="File Name, or the word that you want to replace",
+    )
+    
+    Resultant: StringProperty(
+        name="Resultant",
+        default="Final",
+        description="New Name",
+    ) 
+
+    def execute(self, context):
+        i = 0
+        for obj in bpy.data.objects:
+            i=i+1
+            if self.Original in obj.name:
+                try:
+                    obj.name = str(obj.name).replace(self.Original,self.Resultant)
+                except:
+                    print("Error Occured at " + obj.name )
+            else:
+                pass
+            if i == len(bpy.data.objects)-1:
+                break
+        return {'FINISHED'}
+        
+    def invoke(self, context, event): 
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
@@ -142,8 +176,20 @@ class COS1_PT_gg(bpy.types.Panel):
         layout = self.layout  
         row = layout.row()
         row.operator(BANOperator.bl_idname, text = "Change", icon = "GP_MULTIFRAME_EDITING")
+
+class COS2_PT_gg(bpy.types.Panel):
+    bl_label = "Rename Objects"
+    bl_idname = "cobject_PT2_"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_category = "Tool"
+    
+    def draw(self, context):
+        layout = self.layout  
+        row = layout.row()
+        row.operator(ReANOperator.bl_idname, text = "Rename", icon = "OUTLINER_DATA_GP_LAYER")
         
-_classes = [ RANOperator, BANOperator, COS_PT_gg, COS1_PT_gg]       
+_classes = [ RANOperator,ReANOperator, BANOperator, COS_PT_gg, COS1_PT_gg,COS2_PT_gg]       
 
 def register():
     for cls in _classes:
