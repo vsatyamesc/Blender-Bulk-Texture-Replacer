@@ -33,5 +33,8 @@ Usage:
 ## More Updates on Way!!
 >> Replacing missing image texture with the one you want.
 
+# Remove Unused Nodes
+```Use this on the Scripting Tab on Blender. Copy-Paste the Code and Run. ```
+Removes the unused nodes from the shader editor of all the materials.
 
 ## If you run into Error please raise an issue. But before that please copy the errors from "System Console Window" and paste in the issue.
