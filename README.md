@@ -30,8 +30,8 @@ Usage:
 4. In Resultant, select the type you want to convert to.
 5. Click "OK"
 
-## More Updates on Way!!
->> Replacing missing image texture with the one you want.
+## New Feature: Bulk Rename Objects
+Works like above.
 
 # Remove Unused Nodes
 ```Use this on the Scripting Tab on Blender. Copy-Paste the Code and Run. ```
