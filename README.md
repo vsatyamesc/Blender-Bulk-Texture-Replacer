@@ -1,5 +1,5 @@
 # Blender-Bulk-Texture-Replacer
-### If you are using Blender 4.0 you, download the **replacing_addone.py** directly from repository and install it like usual. If you do not see the Python file in the Blender Addon Installation Window make a zip of this Python file.
+### If you are using Blender 4.0, download the **replacing_addone.py** directly from repository and install it like usual. If you do not see the Python file in the Blender Addon Installation Window make a zip of this Python file.
 Install the Tool.
  
 The Convertor should be inside the "Tool" UI.
