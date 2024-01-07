@@ -3,7 +3,10 @@
 Install the Tool.
  
 The Convertor should be inside the "Tool" UI.
- 
+
+## Bulk Texture Replacer
+>> 1. It can replace bulk replace textures with your input name
+>> 2. Another use case, suppose you have a texture image which is applied to a lot of objects, you can run this addon to rename the texture to your new one, basically Remapping the texture with your new one. Works like Remap user in blender file API.
 Before Using:
 Use a convertor tool to convert all your texture files into whatever you want
  
