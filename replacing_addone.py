@@ -1,12 +1,12 @@
 bl_info = {
     "name": "Bulk Replace",
-    "author": "Seven3D",
+    "author": "Satyam",
     "version": (1, 2),
     "blender": (3, 0, 0),
     "location": "View3D > Tool > Replace Texture(s)",
     "description": "Bulk Replace the Texture \n Bulk convert Blend Mode \n Bulk Name Replace",
     "warning": "",
-    "doc_url": "https://github.com/SatyamSSJ10/Blender-Bulk-Texture-Replacer/blob/main/README.md",
+    "doc_url": "https://github.com/vsatyamesc/Blender-Bulk-Texture-Replacer/blob/main/README.md",
     "category": "Tool",
 }
 
